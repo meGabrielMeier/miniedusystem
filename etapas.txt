@@ -1,0 +1,6 @@
+-Cadastrar livros
+-Cadastrar Usuarios(alunos e professores)
+-Mostrar livros disponíveis para alugar
+
+-Limite de livros por usuários(Max: 2)
+-Sistema de Cadastro
