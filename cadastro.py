@@ -4,18 +4,12 @@ class Usuario:
     self.tipo = tipo
     self.idade = idade
   
-  def exibir_acao(self):
-    return f"{self.tipo} {self.nome} parabéns pelos seus {self.idade} anos."
-  
   def exibir_informacoes(self):
     return f"-{self.nome} {self.tipo} {self.idade}"
   
-
-
 class Aluno(Usuario):
   def __init__(self, nome, idade):
     super().__init__(nome,'Aluno', idade)
-
 
 class Professor(Usuario):
   def __init__(self, nome, idade):
@@ -28,12 +22,10 @@ class CadastraUsuario:
     self.cadastro = []  
 
   def funcao_cadastro(self, nome, tipo, idade):
-    if tipo.lower() == 'aluno' or 'aluna':
+    if tipo.lower() == 'aluno':
       usuario = Aluno(nome, idade)
-    elif tipo.lower() == 'professor' or 'professora':
+    elif tipo.lower() == 'professor':
       usuario = Professor(nome, idade)
-    else:
-      raise ValueError("Erro, apenas digite 'Aluno' ou 'Professor'!")
     
     self.cadastro.append(usuario)
 
@@ -49,13 +41,28 @@ while True:
     
     if opcao == "1":
         nome = input("Nome: ")
-        tipo = input("Tipo (Aluno ou Professor): ")
-        idade = input("Idade: ")
+        while True:
+          tipo = input("Tipo (Aluno ou Professor): ").strip().lower()
+          if tipo.lower() != 'aluno' and tipo.lower() != 'professor':
+            print("-------------")
+            print("Por Favor,apenas digite 'Aluno' ou 'Professor'")
+            tipo = input("Tipo (Aluno ou Professor): ").strip().lower()
+          else:
+            break
+        while True:
+          idade = input("Idade: ")
+          if not idade.isdigit():
+            print("Apenas use números")
+            idade = input("Idade: ")
+          else:
+            idade = int(idade)
+            break
+          print("Cadastrado com sucesso!")
         cadastro.funcao_cadastro(nome, tipo, idade)
+   
     elif opcao == "2":
         print("-------------")
         cadastro.exibir_cadastrados()
-        break
     elif opcao == "3":
       print("Saindo do sistema...")
       break
